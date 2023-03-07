@@ -31,6 +31,7 @@ def start(message):
 
     bot.send_message(message.chat.id, 'Подбери заведение по категории, найди ближайшее или случайное заведение Кирова.\nЖми кнопки внизу 👇', reply_markup=markup)
     func.random = 7
+    datees = []
 
 @bot.message_handler(content_types=['text'])
 def func(message):
@@ -174,8 +175,6 @@ def func(message):
                     top += descr.find_all('div')[0].text + ' ' + descr.find_all('div')[1].text + '\n'
                 if len(about) > 1000:
                     about = about[:20] + '...'
-                print(about)
-                print(top)
                 dates = []
                 items = soup.find('div', id='eventSchedule').find_all('div', class_='Item')
                 for item in items:
@@ -199,16 +198,11 @@ def func(message):
                         for i in seanses:
                             try:
                                 if i.get('class')[0] == "NA":
-                                    seanse += '*' + i.text + '*' + ' '
+                                    pass#seanse += i.text + '' + ' '
                                 else:
                                     seanse += i.text + ' '
                             except TypeError:
                                 seanse += i.text + ' '
-                        print(kino)
-                        print(url1)
-                        print(format)
-                        print(seanse)
-                        print('\n')
                         u = f"*Название кинотеатра:* {kino.replace('Телефон:', '*Телефон:*')}\n{url1}\n{format}\n *Сеансы:* {seanse}"
                         o.append(u)
                     else:
@@ -225,29 +219,24 @@ def func(message):
                         for i in seanses:
                             try:
                                 if i.get('class')[0] == "NA":
-                                    seanse += '*' + i.text + '*' + ' '
+                                    pass#seanse += '*' + i.text + '*' + ' '
                                 else:
                                     seanse += i.text + ' '
                             except TypeError:
                                 seanse += i.text + ' '
-                        print(kino)
-                        print(url1)
-                        print(format)
-                        print(seanse)
-                        print('\n')
                         u = f"*Название кинотеатра:* {kino.replace('Телефон:', '*Телефон:*')}\n{url1}\n{format}\n *Сеансы:* {seanse}"
                         o.append(u)
                     status = schedule.get('class')[1]
                 info_message.append(o)
 
 
-                print(info_message)
                 bot.send_photo(message.chat.id, photo=open('img.jpg','rb'),
                                caption=f"[{name}]({url}) {age}\n\n {about}\n\nКинотеатры: {cinema} \n\n {top}",
                                parse_mode='Markdown', reply_markup=info)
                 func.rand = 10
                 objects.remove(objecd)
                 afisha.append(info_message)
+            print(datees)
 
 
         elif message.text == '🎭 Театры':
@@ -402,14 +391,15 @@ def func(message):
             markup.add(btn1, btn2, btn3)
             bot.send_message(message.chat.id, 'Подбираем 🔄', reply_markup=markup)
             objects = []
-            count = 0
+            count1 = 0
+            teatrs = []
             g = "https://kirov-portal.ru/afisha/events/"
             r = requests.get(g)
             soup1 = BeautifulSoup(r.text, "html.parser")
             soup = soup1.find_all('div', id='searchBlock')[1].find_all('div', class_='Item')
             objects = soup
             for i in range(3):
-                count += 1
+                count1 += 1
                 objecd = objects[i]
                 name = objecd.find('div', class_='robotoBold').find('a').string
                 age = objecd.find_all('div')[1].find('div').string
@@ -428,7 +418,7 @@ def func(message):
                         date = cinema.strip()
                         cinema = ''
                 except IndexError:
-                    description =  objecd.find_all('div', class_='roboto')[1].find('div').string
+                    #description =  objecd.find_all('div', class_='roboto')[1].find('div').string
                     cinema = objecd.find_all('div', class_='verdana')[0].find('div').string
                     date = objecd.find_all('div', class_='verdana')[0].find_all('div')[1].string.strip()
                 out = open("img.jpg", "wb")
@@ -437,15 +427,49 @@ def func(message):
                 img = open('img.jpg', 'rb')
                 info = types.InlineKeyboardMarkup(row_width=2)
                 info.add(
-                    types.InlineKeyboardButton(text="Подробнее📥", callback_data='info', url=url))
-                if cinema == '':
-                    bot.send_photo(message.chat.id, photo=img,
-                                   caption=f"[{name}]({url}) {age}\n\n {description}\n\n{date}",
-                                   parse_mode='Markdown', reply_markup=info)
-                else:
-                    bot.send_photo(message.chat.id, photo=img,
-                                   caption=f"[{name}]({url}) {age}\n\n {description}\n\nМеста проведения: {cinema}\n\n{date}",
-                                   parse_mode='Markdown', reply_markup=info)
+                    types.InlineKeyboardButton(text="Расписание/Где купить📥", callback_data=f'teatr_{count1}'))
+                r = requests.get(url)
+                soup = BeautifulSoup(r.text, "html.parser")
+                about = soup.find('div', class_='newsContent').text[0:500]
+                inf = soup.find_all('div', class_='roboto')[3].find_all('div', style='display: table-row;')
+                top = ''
+                for descr in inf:
+                    top += descr.find_all('div')[0].text + ' ' + descr.find_all('div')[1].text + '\n'
+                if len(about) > 1000:
+                    about = about[:20] + '...'
+                teatr = []
+                items = soup.find_all('div', class_='scheduleTable', limit=3)  # .find_all('div', class_='Item')
+                countt = 0
+                for item in items:
+                    countt+=1
+                    date_teatr = item.find_all('div', class_='roboto')[0].find('b').text
+                    time_teatr = item.find_all('div', class_='roboto')[0].text.replace(date_teatr, '').strip().replace(
+                        '\t', '')
+                    place_teatr = item.find('div', class_='robotoBold').text.strip()
+                    adress_teatr = \
+                        item.find('div',
+                                  style='color:#808184; font-size:10px; line-height:16px; margin-top:3px;').find_all(
+                            'div')[0].text.strip()
+                    phone_teatr = \
+                        item.find('div',
+                                  style='color:#808184; font-size:10px; line-height:16px; margin-top:3px;').find_all(
+                            'div')[1].text.strip()
+                    price_teatr = item.find('div', class_='roboto',
+                                            style='display:table-cell; font-size:16px;').text.strip()
+                    #print(items[-1])
+                    if item == items[-1]:
+                        teatr.append(
+                            f"{name}\n*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\n[ПОДРОБНЕЕ...]({url})")
+                    else:
+                        teatr.append(
+                            f"{name}\n*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}")
+
+                teatrs.append(teatr)
+                #teatrs.append(f"[...]({url})")
+                print(teatrs)
+                bot.send_photo(message.chat.id, photo=open('img.jpg', 'rb'),
+                               caption=f"[{name}]({url}) {age}\n\n {about}\n\nТеатры: {cinema} \n\n {top}",
+                               parse_mode='Markdown', reply_markup=info)
                 func.rand = 12
                 objects.remove(objecd)
 
@@ -2408,103 +2432,106 @@ def func(message):
             markup.add(btn1, btn2, btn3, btn4, btn5, btn6)
             markup.add(types.KeyboardButton('⏪Вернутся в главное меню'))
             bot.send_message(message.chat.id, 'Выберите, что ищем', reply_markup=markup)
-        elif message.text == datees[0][0] and message_day == 1:
-            for kino in afisha[0][0]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
-        elif message.text == datees[0][1] and message_day == 1:
-            for kino in afisha[0][1]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
-        elif message.text == datees[0][2] and message_day == 1:
-            for kino in afisha[0][2]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
 
-        elif message.text == datees[1][0] and message_day == 2:
-            for kino in afisha[1][0]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
-
-        elif message.text == datees[1][1] and message_day == 2:
-            for kino in afisha[1][1]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
-
-        elif message.text == datees[1][2] and message_day == 2:
-            for kino in afisha[1][2]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
-
-
-        elif message.text == datees[2][0] and message_day == 3:
-            for kino in afisha[2][0]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
-
-        elif message.text == datees[2][1] and message_day == 3:
-            for kino in afisha[2][1]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
-
-        elif message.text == datees[2][2] and message_day == 3:
-            for kino in afisha[2][2]:
-                urll = kino.split()[6]
-                print(kino.split())
-                markup = types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
-                markup.add(button1)
-                about_afisha = kino.replace(kino.split()[6] + '\n', '')
-                bot.send_message(message.chat.id,
-                                 about_afisha, parse_mode='Markdown', reply_markup=markup)
+        #elif message.text == datees[0][0] and message_day == 1:
+        #    for kino in afisha[0][0]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
+#
+        #elif message.text == datees[0][1] and message_day == 1:
+        #    for kino in afisha[0][1]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
+#
+        #elif message.text == datees[0][2] and message_day == 1:
+        #    for kino in afisha[0][2]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
+#
+        #elif message.text == datees[1][0] and message_day == 2:
+        #    for kino in afisha[1][0]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
+#
+        #elif message.text == datees[1][1] and message_day == 2:
+        #    for kino in afisha[1][1]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
+#
+        #elif message.text == datees[1][2] and message_day == 2:
+        #    for kino in afisha[1][2]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
+#
+#
+        #elif message.text == datees[2][0] and message_day == 3:
+        #    for kino in afisha[2][0]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
+#
+        #elif message.text == datees[2][1] and message_day == 3:
+        #    for kino in afisha[2][1]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
+#
+        #elif message.text == datees[2][2] and message_day == 3:
+        #    for kino in afisha[2][2]:
+        #        urll = kino.split()[6]
+        #        print(kino.split())
+        #        markup = types.InlineKeyboardMarkup()
+        #        button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+        #        markup.add(button1)
+        #        about_afisha = kino.replace(kino.split()[6] + '\n', '')
+        #        bot.send_message(message.chat.id,
+        #                         about_afisha, parse_mode='Markdown', reply_markup=markup)
 
 
 
@@ -3076,8 +3103,25 @@ def func(message):
                                                            caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
                                                            reply_markup=markup, parse_mode='Markdown')
                         count+=1
-
-
+        elif len(datees) > 0:
+            coun = 0
+            coun1 = 0
+            for i in datees:
+                coun += 1
+                for g in i:
+                    coun1 += 1
+                    if message.text == g and message_day == coun:
+                        print(coun, coun1, g)
+                        for kino in afisha[coun - 1][coun1 - 1]:
+                            print()
+                            urll = kino.split()[6]
+                            print(kino.split())
+                            markup = types.InlineKeyboardMarkup()
+                            button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+                            markup.add(button1)
+                            about_afisha = kino.replace(kino.split()[6] + '\n', '')
+                            bot.send_message(message.chat.id,
+                                             about_afisha, parse_mode='Markdown', reply_markup=markup)
 
 
         else:
@@ -3205,6 +3249,7 @@ def func(message):
     except AttributeError or telebot.apihelper.ApiTelegramException:
         bot.send_message(message.chat.id,
                          'Попробуйте еще раз вырбать нужную вам категорию или вернитесь в главное меню')
+
 
 
 @bot.message_handler(content_types=['location'])
@@ -4023,7 +4068,7 @@ def callback_inline(call):
             print(afisha)
     for i in range(1, count1+1):
         if call.data == f'teatr_{i}':
-            print(teatrs)
+            #print(teatrs)
             for t in teatrs[i-1]:
                 bot.send_message(call.message.chat.id, t, parse_mode='Markdown')
             qwert = func.rand
