@@ -203,6 +203,8 @@ def func(message):
                                     seanse += i.text + ' '
                             except TypeError:
                                 seanse += i.text + ' '
+                        if seanse == '':
+                            seanse = "Сеансов на этот день больше нет"
                         u = f"*Название кинотеатра:* {kino.replace('Телефон:', '*Телефон:*')}\n{url1}\n{format}\n *Сеансы:* {seanse}"
                         o.append(u)
                     else:
@@ -224,6 +226,8 @@ def func(message):
                                     seanse += i.text + ' '
                             except TypeError:
                                 seanse += i.text + ' '
+                        if seanse == '':
+                            seanse = "Сеансов на этот день больше нет"
                         u = f"*Название кинотеатра:* {kino.replace('Телефон:', '*Телефон:*')}\n{url1}\n{format}\n *Сеансы:* {seanse}"
                         o.append(u)
                     status = schedule.get('class')[1]
@@ -3108,10 +3112,12 @@ def func(message):
             coun1 = 0
             for i in datees:
                 coun += 1
+                coun1 = 0
                 for g in i:
                     coun1 += 1
                     if message.text == g and message_day == coun:
                         print(coun, coun1, g)
+                        print(afisha)
                         for kino in afisha[coun - 1][coun1 - 1]:
                             print()
                             urll = kino.split()[6]
