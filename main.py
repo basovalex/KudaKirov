@@ -22,6 +22,7 @@ class Object:
 bot = telebot.TeleBot("5773105775:AAEJKlT0dtR-fo_W-Lrg2bCmEiXl1fJfbos")
 @bot.message_handler(commands=['start'])
 def start(message):
+    global datees
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     btn1 = types.KeyboardButton("🔎Категории")
     btn2 = types.KeyboardButton(text="📍 Найти ближайшие", request_location=True)
@@ -35,11 +36,13 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def func(message):
+    global datees
     try:
         if message.text == '🔎Категории':
             channel = '@kirovchano'
             status = ['creator', 'administrator', 'member']
             check = False
+            datees = []
             for stat in status:
                 if stat == bot.get_chat_member(chat_id="@kirovchano", user_id=message.from_user.id).status:
                     check = True
@@ -103,6 +106,8 @@ def func(message):
                              'Подбери заведение по категории, найди ближайшее или случайное заведение Кирова.\nЖми кнопки внизу 👇',
                              reply_markup=markup)
             func.random = 7
+            datees = []
+
 
         elif message.text == '📅 Афиша':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
@@ -124,7 +129,7 @@ def func(message):
             func.random = 8
 
         elif message.text == '🎥 Кино':
-            global datees
+
             global ob_objects
             global count1
             global objects
@@ -284,7 +289,7 @@ def func(message):
                 img = open('img.jpg', 'rb')
                 info = types.InlineKeyboardMarkup(row_width=2)
                 info.add(
-                    types.InlineKeyboardButton(text="Расписание/Где купить📥", callback_data=f'teatr_{count1}'))
+                    types.InlineKeyboardButton(text="Расписание/Где купить📥", callback_data=f'teatr1_{count1}'))
                 r = requests.get(url)
                 soup = BeautifulSoup(r.text, "html.parser")
                 about = soup.find('div', class_='newsContent').text[0:500]
@@ -303,7 +308,26 @@ def func(message):
                     adress_teatr = item.find('div', style='color:#808184; font-size:10px; line-height:16px; margin-top:3px;').find_all('div')[0].text.strip()
                     phone_teatr = item.find('div', style='color:#808184; font-size:10px; line-height:16px; margin-top:3px;').find_all('div')[1].text.strip()
                     price_teatr = item.find('div', class_='roboto', style ='display:table-cell; font-size:16px;').text.strip()
-                    teatr.append(f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}")
+                    if "Театр на Спасской" in place_teatr:
+                        teatr.append(f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://ekvus-kirov.ru/afisha/show/")
+                    elif "Драматический театр" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovdramteatr.ru/shows/")
+                    elif "Театр кукол" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovkukla.ru/our-services")
+                    elif "Филармония" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://www.philarmonia43.ru/events/")
+                    elif "ОДНТ" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://odntkirov.ru")
+                    elif "Родина" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://дк-родина.рф")
+                    elif "Квартира" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/kvartira-kirov?source=search-page")
                 teatrs.append(teatr)
                 print(teatrs)
                 bot.send_photo(message.chat.id, photo=open('img.jpg', 'rb'),
@@ -2313,7 +2337,13 @@ def func(message):
         elif message.text == 'Показать ещё ⤵' and func.rand == 11:
             for i in range(3):
                 count1 += 1
-                objecd = objects[i]
+                if objects == []:
+                    bot.send_message(message.chat.id, 'Вы просмотрели все спектакли 💨')
+                    break
+                try:
+                    objecd = objects[i]
+                except IndexError:
+                    objecd = objects[-1]
                 name = objecd.find('div', class_='robotoBold').find('a').string
                 age = objecd.find_all('div')[1].find('div').string
                 try:
@@ -2336,7 +2366,7 @@ def func(message):
                 img = open('img.jpg', 'rb')
                 info = types.InlineKeyboardMarkup(row_width=2)
                 info.add(
-                    types.InlineKeyboardButton(text="Расписание/Где купить📥", callback_data=f'teatr_{count1}'))
+                    types.InlineKeyboardButton(text="Расписание/Где купить📥", callback_data=f'teatr1_{count1}'))
                 r = requests.get(url)
                 soup = BeautifulSoup(r.text, "html.parser")
                 about = soup.find('div', class_='newsContent').text[0:500]
@@ -2361,8 +2391,27 @@ def func(message):
                         'div')[1].text.strip()
                     price_teatr = item.find('div', class_='roboto',
                                             style='display:table-cell; font-size:16px;').text.strip()
-                    teatr.append(
-                        f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}")
+                    if "Театр на Спасской" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://ekvus-kirov.ru/afisha/show/")
+                    elif "Драматический театр" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovdramteatr.ru/shows/")
+                    elif "Театр кукол" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovkukla.ru/our-services")
+                    elif "Филармония" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://www.philarmonia43.ru/events/")
+                    elif "ОДНТ" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://odntkirov.ru")
+                    elif "Родина" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://дк-родина.рф")
+                    elif "Квартира" in place_teatr:
+                        teatr.append(
+                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/kvartira-kirov?source=search-page")
                 teatrs.append(teatr)
                 print(teatrs)
                 bot.send_photo(message.chat.id, photo=open('img.jpg', 'rb'),
@@ -3254,7 +3303,7 @@ def func(message):
 
     except AttributeError or telebot.apihelper.ApiTelegramException:
         bot.send_message(message.chat.id,
-                         'Попробуйте еще раз вырбать нужную вам категорию или вернитесь в главное меню')
+                         'Попробуйте еще раз выбрать нужную вам категорию или вернитесь в главное меню или напишите команду /start')
 
 
 
@@ -4077,6 +4126,17 @@ def callback_inline(call):
             #print(teatrs)
             for t in teatrs[i-1]:
                 bot.send_message(call.message.chat.id, t, parse_mode='Markdown')
+            qwert = func.rand
+            func.randomi = 10
+    for i in range(1, count1+1):
+        if call.data == f'teatr1_{i}':
+            for t in teatrs[i-1]:
+                urll = t.split()[-1]
+                print(t.split()[-1])
+                markup = types.InlineKeyboardMarkup()
+                button1 = types.InlineKeyboardButton("ЗАБРОНИРОВАТЬ", url=urll)
+                markup.add(button1)
+                bot.send_message(call.message.chat.id, t.replace(urll, ''), parse_mode='Markdown', reply_markup=markup)
             qwert = func.rand
             func.randomi = 10
 
