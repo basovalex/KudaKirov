@@ -310,26 +310,67 @@ def func(message):
                     adress_teatr = item.find('div', style='color:#808184; font-size:10px; line-height:16px; margin-top:3px;').find_all('div')[0].text.strip()
                     phone_teatr = item.find('div', style='color:#808184; font-size:10px; line-height:16px; margin-top:3px;').find_all('div')[1].text.strip()
                     price_teatr = item.find('div', class_='roboto', style ='display:table-cell; font-size:16px;').text.strip()
+                    if time_teatr == '':
+                        dat_teatr = f"{date_teatr}"
+                    else:
+                        dat_teatr = f"{date_teatr}, {time_teatr}"
+                    if adress_teatr == '':
+                        plac_teatr = f"{place_teatr.replace(',', '')}"
+                    else:
+                        plac_teatr = f"{place_teatr}, {adress_teatr}"
+                    if phone_teatr == 'Телефон:':
+                        phone_teatr = 'Не указан'
                     if "Театр на Спасской" in place_teatr:
-                        teatr.append(f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://ekvus-kirov.ru/afisha/show/")
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://ekvus-kirov.ru/afisha/show/")
+                    elif "Органный зал" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovorgan.ru/afisha/")
                     elif "Драматический театр" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovdramteatr.ru/shows/")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovdramteatr.ru/shows/")
                     elif "Театр кукол" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovkukla.ru/afisha")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovkukla.ru/afisha")
                     elif "Филармония" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://www.philarmonia43.ru/events/")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://www.philarmonia43.ru/events/")
                     elif "ОДНТ" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://odntkirov.ru")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://odntkirov.ru")
                     elif "Родина" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://дк-родина.рф")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://дк-родина.рф")
+                    elif "Mr. Green" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/mister-green")
                     elif "Квартира" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/kvartira-kirov?source=search-page")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/kvartira-kirov?source=search-page")
+                    elif "СКЦ Семья" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/semia-kirov/schedule")
+                    elif "Атмосфера" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/atmosfera-kirov/schedule")
+                    elif "Конструктор-Практик" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/konstruktor-praktik")
+                    elif "ДК железнодорожников" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://dkrzdkirov.ru/afisha/")
+                    elif "Цирк" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://circus-kirov.ru")
+                    elif "Тир" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://vk.com/tir_kot")
+                    elif "GAUDI" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://gaudikirov.ru/afisha/")
+                    else:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\n{url}")
                 teatrs.append(teatr)
                 print(teatrs)
                 bot.send_photo(message.chat.id, photo=open('img.jpg', 'rb'),
@@ -378,7 +419,7 @@ def func(message):
                 img = open('img.jpg', 'rb')
                 info = types.InlineKeyboardMarkup(row_width=2)
                 info.add(
-                    types.InlineKeyboardButton(text="Расписание/Где купить📥", callback_data=f'teatr_{count1}'))
+                    types.InlineKeyboardButton(text="Расписание/Где купить📥", callback_data=f'teatr1_{count1}'))
                 r = requests.get(url)
                 soup = BeautifulSoup(r.text, "html.parser")
                 about = soup.find('div', class_='newsContent').text[0:500]
@@ -403,12 +444,71 @@ def func(message):
                         'div')[1].text.strip()
                     price_teatr = item.find('div', class_='roboto',
                                             style='display:table-cell; font-size:16px;').text.strip()
-                    teatr.append(
-                        f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}")
+                    if time_teatr == '':
+                        dat_teatr = f"{date_teatr}"
+                    else:
+                        dat_teatr = f"{date_teatr}, {time_teatr}"
+                    if adress_teatr == '':
+                        plac_teatr = f"{place_teatr.replace(',', '')}"
+                    else:
+                        plac_teatr = f"{place_teatr}, {adress_teatr}"
+                    if phone_teatr == 'Телефон:':
+                        phone_teatr = 'Не указан'
+                    if "Театр на Спасской" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://ekvus-kirov.ru/afisha/show/")
+                    elif "Органный зал" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovorgan.ru/afisha/")
+                    elif "Драматический театр" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovdramteatr.ru/shows/")
+                    elif "Театр кукол" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovkukla.ru/afisha")
+                    elif "Филармония" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://www.philarmonia43.ru/events/")
+                    elif "ОДНТ" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://odntkirov.ru")
+                    elif "Родина" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://дк-родина.рф")
+                    elif "Mr. Green" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/mister-green")
+                    elif "Квартира" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/kvartira-kirov?source=search-page")
+                    elif "СКЦ Семья" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/semia-kirov/schedule")
+                    elif "Атмосфера" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/atmosfera-kirov/schedule")
+                    elif "Конструктор-Практик" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/konstruktor-praktik")
+                    elif "ДК железнодорожников" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://dkrzdkirov.ru/afisha/")
+                    elif "Цирк" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://circus-kirov.ru")
+                    elif "Тир" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://vk.com/tir_kot")
+                    elif "GAUDI" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://gaudikirov.ru/afisha/")
+                    else:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\n{url}")
                 teatrs.append(teatr)
                 print(teatrs)
                 bot.send_photo(message.chat.id, photo=open('img.jpg', 'rb'),
-                               caption=f"[{name}]({url}) {age}\n\n {about}\n\nТеатры: {cinema} \n\n {top}",
+                               caption=f"[{name}]({url}) {age}\n\n {about}\n\n{cinema} \n\n {top}",
                                parse_mode='Markdown', reply_markup=info)
                 func.rand = 11
                 objects.remove(objecd)
@@ -498,9 +598,9 @@ def func(message):
                 #teatrs.append(f"[...]({url})")
                 print(teatrs)
                 bot.send_photo(message.chat.id, photo=open('img.jpg', 'rb'),
-                               caption=f"[{name}]({url}) {age}\n\n {about}\n\nТеатры: {cinema} \n\n {top}",
+                               caption=f"[{name}]({url}) {age}\n\n {about}\n\n {cinema} \n\n {top}",
                                parse_mode='Markdown', reply_markup=info)
-                func.rand = 12
+                func.rand = 13
                 objects.remove(objecd)
 
         elif message.text == '🖻 Выставки':
@@ -2902,7 +3002,7 @@ def func(message):
             for i in range(3):
                 count1 += 1
                 if objects == []:
-                    bot.send_message(message.chat.id, 'Вы просмотрели все спектакли 💨')
+                    bot.send_message(message.chat.id, 'Вы просмотрели все события 💨')
                     break
                 try:
                     objecd = objects[i]
@@ -2919,11 +3019,11 @@ def func(message):
                 img = requests.get('https://kirov-portal.ru' + objecd.find('img').get('src'))
                 try:
                     cinema = objecd.find_all('div', class_='roboto')[1].find('div').string
-                    date = objecd.find_all('div', class_='roboto')[1].find_all('div')[1].string.strip()
+                    #date = objecd.find_all('div', class_='roboto')[1].find_all('div')[1].string.strip()
                 except IndexError:
-                    description = objecd.find_all('div', class_='verdana')[1].find('div').string
+                    #description = objecd.find_all('div', class_='verdana')[1].find('div').string
                     cinema = objecd.find_all('div', class_='verdana')[0].find('div').string
-                    date = objecd.find_all('div', class_='verdana')[0].find_all('div')[1].string.strip()
+                    #date = objecd.find_all('div', class_='verdana')[0].find_all('div')[1].string.strip()
                 out = open("img.jpg", "wb")
                 out.write(img.content)
                 out.close()
@@ -2955,31 +3055,71 @@ def func(message):
                         'div')[1].text.strip()
                     price_teatr = item.find('div', class_='roboto',
                                             style='display:table-cell; font-size:16px;').text.strip()
+                    if time_teatr == '':
+                        dat_teatr = f"{date_teatr}"
+                    else:
+                        dat_teatr = f"{date_teatr}, {time_teatr}"
+                    if adress_teatr == '':
+                        plac_teatr = f"{place_teatr.replace(',', '')}"
+                    else:
+                        plac_teatr = f"{place_teatr}, {adress_teatr}"
+                    if phone_teatr == 'Телефон:':
+                        phone_teatr = 'Не указан'
                     if "Театр на Спасской" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://ekvus-kirov.ru/afisha/show/")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://ekvus-kirov.ru/afisha/show/")
+                    elif "Органный зал" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovorgan.ru/afisha/")
                     elif "Драматический театр" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovdramteatr.ru/shows/")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovdramteatr.ru/shows/")
                     elif "Театр кукол" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovkukla.ru/afisha")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovkukla.ru/afisha")
                     elif "Филармония" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://www.philarmonia43.ru/events/")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://www.philarmonia43.ru/events/")
                     elif "ОДНТ" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://odntkirov.ru")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://odntkirov.ru")
                     elif "Родина" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://дк-родина.рф")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://дк-родина.рф")
+                    elif "Mr. Green" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/mister-green")
                     elif "Квартира" in place_teatr:
                         teatr.append(
-                            f"*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/kvartira-kirov?source=search-page")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/kvartira-kirov?source=search-page")
+                    elif "СКЦ Семья" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/semia-kirov/schedule")
+                    elif "Атмосфера" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/atmosfera-kirov/schedule")
+                    elif "Конструктор-Практик" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/konstruktor-praktik")
+                    elif "ДК железнодорожников" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://dkrzdkirov.ru/afisha/")
+                    elif "Цирк" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://circus-kirov.ru")
+                    elif "Тир" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://vk.com/tir_kot")
+                    elif "GAUDI" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://gaudikirov.ru/afisha/")
+                    else:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\n{url}")
                 teatrs.append(teatr)
                 print(teatrs)
                 bot.send_photo(message.chat.id, photo=open('img.jpg', 'rb'),
-                               caption=f"[{name}]({url}) {age}\n\n {about}\n\nТеатры: {cinema} \n\n {top}",
+                               caption=f"[{name}]({url}) {age}\n\n {about}\n\n{cinema.strip()} \n\n {top}",
                                parse_mode='Markdown', reply_markup=info)
                 objects.remove(objecd)
                 func.random == 8
@@ -3030,6 +3170,88 @@ def func(message):
                 func.rand = 12
                 func.random == 8
                 objects.remove(objecd)
+        elif message.text == 'Показать ещё ⤵' and func.rand == 13:
+            for i in range(3):
+                if objects == []:
+                    bot.send_message(message.chat.id, 'Вы просмотрели все события 💨')
+                    break
+                try:
+                    objecd = objects[i]
+                except IndexError:
+                    objecd = objects[-1]
+                name = objecd.find('div', class_='robotoBold').find('a').string
+                age = objecd.find_all('div')[1].find('div').string
+                try:
+                    description = objecd.find('div', class_='roboto').string
+                    description = textwrap.fill("Краткое описание: " + description, 40)
+                except AttributeError:
+                    description = ''
+                url = 'https://kirov-portal.ru' + objecd.find('div', class_='robotoBold').find('a').get('href')
+                img = requests.get('https://kirov-portal.ru' + objecd.find('img').get('src'))
+                try:
+                    cinema = objecd.find_all('div', class_='roboto')[1].find('div').string
+                    try:
+                        date = objecd.find_all('div', class_='roboto')[1].find_all('div')[1].string.strip()
+                    except IndexError:
+                        date = cinema.strip()
+                        cinema = ''
+                except IndexError:
+                    # description =  objecd.find_all('div', class_='roboto')[1].find('div').string
+                    cinema = objecd.find_all('div', class_='verdana')[0].find('div').string
+                    date = objecd.find_all('div', class_='verdana')[0].find_all('div')[1].string.strip()
+                out = open("img.jpg", "wb")
+                out.write(img.content)
+                out.close()
+                img = open('img.jpg', 'rb')
+                info = types.InlineKeyboardMarkup(row_width=2)
+                info.add(
+                    types.InlineKeyboardButton(text="Расписание/Где купить📥", callback_data=f'teatr_{count1}'))
+                r = requests.get(url)
+                soup = BeautifulSoup(r.text, "html.parser")
+                about = soup.find('div', class_='newsContent').text[0:500]
+                inf = soup.find_all('div', class_='roboto')[3].find_all('div', style='display: table-row;')
+                top = ''
+                for descr in inf:
+                    top += descr.find_all('div')[0].text + ' ' + descr.find_all('div')[1].text + '\n'
+                if len(about) > 1000:
+                    about = about[:20] + '...'
+                teatr = []
+                items = soup.find_all('div', class_='scheduleTable', limit=3)  # .find_all('div', class_='Item')
+                countt = 0
+                for item in items:
+                    countt += 1
+                    date_teatr = item.find_all('div', class_='roboto')[0].find('b').text
+                    time_teatr = item.find_all('div', class_='roboto')[0].text.replace(date_teatr, '').strip().replace(
+                        '\t', '')
+                    place_teatr = item.find('div', class_='robotoBold').text.strip()
+                    adress_teatr = \
+                        item.find('div',
+                                  style='color:#808184; font-size:10px; line-height:16px; margin-top:3px;').find_all(
+                            'div')[0].text.strip()
+                    phone_teatr = \
+                        item.find('div',
+                                  style='color:#808184; font-size:10px; line-height:16px; margin-top:3px;').find_all(
+                            'div')[1].text.strip()
+                    price_teatr = item.find('div', class_='roboto',
+                                            style='display:table-cell; font-size:16px;').text.strip()
+                    # print(items[-1])
+                    if item == items[-1]:
+                        teatr.append(
+                            f"{name}\n*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\n[ПОДРОБНЕЕ...]({url})")
+                    else:
+                        teatr.append(
+                            f"{name}\n*ДАТА:* {date_teatr}, {time_teatr}\n*МЕСТО:* {place_teatr}, {adress_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}")
+
+                teatrs.append(teatr)
+                # teatrs.append(f"[...]({url})")
+                print(teatrs)
+                bot.send_photo(message.chat.id, photo=open('img.jpg', 'rb'),
+                               caption=f"[{name}]({url}) {age}\n\n {about}\n\n {cinema} \n\n {top}",
+                               parse_mode='Markdown', reply_markup=info)
+                func.random == 8
+                func.rand = 13
+                objects.remove(objecd)
+
         elif message.text == '⬅Назад' and func.randomi == 10:
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
             btn1 = types.KeyboardButton("Показать ещё ⤵")
