@@ -69,8 +69,7 @@ def func(message):
             func.randomi = 1
 
         elif message.text == 'Проверить подписку 🔄':
-            channel = 'https://t.me/' \
-                      'kirovchano'
+            channel = 'https://t.me/kirovchano'
             if message.chat.type == 'private':
                 status = ['creator', 'administrator', 'member']
                 check = False
@@ -323,6 +322,9 @@ def func(message):
                     if "Театр на Спасской" in place_teatr:
                         teatr.append(
                             f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://ekvus-kirov.ru/afisha/show/")
+                    elif "Руки Вверх" in place_teatr:
+                        teatr.append(
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/ruki-vverkh-bar-kirov/schedule")
                     elif "Органный зал" in place_teatr:
                         teatr.append(
                             f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://kirovorgan.ru/afisha/")
@@ -340,7 +342,7 @@ def func(message):
                             f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://odntkirov.ru")
                     elif "Родина" in place_teatr:
                         teatr.append(
-                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://дк-родина.рф")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttp://xn----8sbkbujyfr.xn--p1ai/afisha/")
                     elif "Mr. Green" in place_teatr:
                         teatr.append(
                             f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/mister-green")
@@ -361,7 +363,7 @@ def func(message):
                             f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://dkrzdkirov.ru/afisha/")
                     elif "Цирк" in place_teatr:
                         teatr.append(
-                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://circus-kirov.ru")
+                            f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://afisha.yandex.ru/kirov/concert/places/ruki-vverkh-bar-kirov/schedule")
                     elif "Тир" in place_teatr:
                         teatr.append(
                             f"*{name}*\n*ДАТА:* {dat_teatr}\n*МЕСТО:* {plac_teatr}\n*ТЕЛЕФОН:* {phone_teatr}\n*СТОИМОСТЬ БИЛЕТА:* {price_teatr}\nhttps://vk.com/tir_kot")
@@ -2010,554 +2012,8 @@ def func(message):
                                 markup.add(button1)
 
                                 schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
-                                if price == '':
-                                    price = '???'
                                 if url == '':
                                     if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                else:
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                print(min_dist)
-                                rest.remove(min_dist)
-                                break
-                        count += 1
-        elif message.text == 'Показать ещё⤵' and location.random == 3:
-            for k in range(3):
-                with open("kalyan.csv", encoding='utf-8') as r_file:
-                    file_reader = csv.reader(r_file, delimiter=",")
-                    try:
-                        min_dist = min(rest)
-                    except ValueError:
-                        bot.send_message(message.chat.id, 'Вы просмотрели все кальянные 💨')
-                        break
-                    count = 0
-                    for row1 in file_reader:
-                        if count == 0:
-                            pass
-                        else:
-                            lat = row1[10]
-                            lon = row1[11]
-                            coords_2 = (lat, lon)
-                            if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
-                                name = row1[0]
-                                kitchen = row1[2]
-                                category = row1[1]
-                                price = row1[3]
-                                address = row1[4]
-                                schedule = row1[5].split(sep=',')
-                                phone = row1[6]
-                                url = row1[7]
-                                phot = requests.get(row1[8])
-                                id = row1[9]
-                                out = open("img.jpg", "wb")
-                                out.write(phot.content)
-                                out.close()
-                                img = open('img.jpg', 'rb')
-                                week = datetime.datetime.today().weekday() + 1
-                                markup = types.InlineKeyboardMarkup()
-                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                markup.add(button1)
-
-                                schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
-                                if price == '':
-                                    price = '???'
-                                if url == '':
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                else:
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                rest.remove(min_dist)
-                                break
-                        count += 1
-        elif message.text == 'Показать ещё⤵' and location.random == 4:
-            for k in range(3):
-                with open("bar.csv", encoding='utf-8') as r_file:
-                    file_reader = csv.reader(r_file, delimiter=",")
-                    try:
-                        min_dist = min(rest)
-                    except ValueError:
-                        bot.send_message(message.chat.id, 'Вы просмотрели все бары 💨')
-                        break
-                    count = 0
-                    for row1 in file_reader:
-                        if count == 0:
-                            pass
-                        else:
-                            lat = row1[10]
-                            lon = row1[11]
-                            coords_2 = (lat, lon)
-                            if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
-                                name = row1[0]
-                                kitchen = row1[2]
-                                category = row1[1]
-                                price = row1[3]
-                                address = row1[4]
-                                schedule = row1[5].split(sep=',')
-                                phone = row1[6]
-                                url = row1[7]
-                                phot = requests.get(row1[8])
-                                id = row1[9]
-                                out = open("img.jpg", "wb")
-                                out.write(phot.content)
-                                out.close()
-                                img = open('img.jpg', 'rb')
-                                week = datetime.datetime.today().weekday() + 1
-                                markup = types.InlineKeyboardMarkup()
-                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                markup.add(button1)
-
-                                schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
-                                if price == '':
-                                    price = '???'
-                                if url == '':
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                else:
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                rest.remove(min_dist)
-                                break
-                        count += 1
-        elif message.text == 'Показать ещё⤵' and location.random == 5:
-            for k in range(3):
-                with open("breakfast.csv", encoding='utf-8') as r_file:
-                    file_reader = csv.reader(r_file, delimiter=",")
-                    try:
-                        min_dist = min(rest)
-                    except ValueError:
-                        bot.send_message(message.chat.id, 'Вы просмотрели все заведения с завтраками 💨')
-                        break
-                    count = 0
-                    for row1 in file_reader:
-                        if count == 0:
-                            pass
-                        else:
-                            lat = row1[10]
-                            lon = row1[11]
-                            coords_2 = (lat, lon)
-                            if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
-                                name = row1[0]
-                                kitchen = row1[2]
-                                category = row1[1]
-                                price = row1[3]
-                                address = row1[4]
-                                schedule = row1[5].split(sep=',')
-                                phone = row1[6]
-                                url = row1[7]
-                                phot = requests.get(row1[8])
-                                id = row1[9]
-                                out = open("img.jpg", "wb")
-                                out.write(phot.content)
-                                out.close()
-                                img = open('img.jpg', 'rb')
-                                week = datetime.datetime.today().weekday() + 1
-                                markup = types.InlineKeyboardMarkup()
-                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                markup.add(button1)
-
-                                schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
-                                if price == '':
-                                    price = '???'
-                                if url == '':
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                else:
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                rest.remove(min_dist)
-                                break
-                        count += 1
-        elif message.text == 'Показать ещё⤵' and location.random == 6:
-            for k in range(3):
-                with open("karaoke.csv", encoding='utf-8') as r_file:
-                    file_reader = csv.reader(r_file, delimiter=",")
-                    try:
-                        min_dist = min(rest)
-                    except ValueError:
-                        bot.send_message(message.chat.id, 'Вы просмотрели все заведения с караоке 💨')
-                        break
-                    count = 0
-                    for row1 in file_reader:
-                        if count == 0:
-                            pass
-                        else:
-                            lat = row1[10]
-                            lon = row1[11]
-                            coords_2 = (lat, lon)
-                            if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
-                                name = row1[0]
-                                kitchen = row1[2]
-                                category = row1[1]
-                                price = row1[3]
-                                address = row1[4]
-                                schedule = row1[5].split(sep=',')
-                                phone = row1[6]
-                                url = row1[7]
-                                phot = requests.get(row1[8])
-                                id = row1[9]
-                                out = open("img.jpg", "wb")
-                                out.write(phot.content)
-                                out.close()
-                                img = open('img.jpg', 'rb')
-                                week = datetime.datetime.today().weekday() + 1
-                                markup = types.InlineKeyboardMarkup()
-                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                markup.add(button1)
-
-                                schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
-                                if price == '':
-                                    price = '???'
-                                if url == '':
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Показать на карте",
-                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                else:
-                                    if phone != '':
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                    else:
-                                        if kitchen == '':
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                        else:
-                                            markup = types.InlineKeyboardMarkup()
-                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                            markup.add(button1)
-                                            bot.send_photo(message.chat.id, photo=img,
-                                                           caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                           reply_markup=markup, parse_mode='Markdown')
-                                rest.remove(min_dist)
-                                break
-                        count += 1
-        elif message.text == 'Показать ещё⤵' and location.random == 7:
-            for k in range(3):
-                with open("all_objects.csv", encoding='utf-8') as r_file:
-                    file_reader = csv.reader(r_file, delimiter=",")
-                    try:
-                        min_dist = min(rest)
-                    except ValueError:
-                        bot.send_message(message.chat.id, 'Вы просмотрели все заведения 💨')
-                        break
-                    count = 0
-                    for row1 in file_reader:
-                        try:
-                            if count == 0:
-                                pass
-                            else:
-                                lat = row1[10]
-                                lon = row1[11]
-                                coords_2 = (lat, lon)
-                                if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
-                                    name = row1[0]
-                                    kitchen = row1[2]
-                                    category = row1[1]
-                                    price = row1[3]
-                                    address = row1[4]
-                                    schedule = row1[5].split(sep=',')
-                                    phone = row1[6]
-                                    url = row1[7]
-                                    phot = requests.get(row1[8])
-                                    id = row1[9]
-                                    out = open("img.jpg", "wb")
-                                    out.write(phot.content)
-                                    out.close()
-                                    img = open('img.jpg', 'rb')
-                                    week = datetime.datetime.today().weekday() + 1
-                                    markup = types.InlineKeyboardMarkup()
-                                    button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
-                                    markup.add(button1)
-
-                                    schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
-                                    if url == '':
                                         if kitchen == '':
                                             markup = types.InlineKeyboardMarkup()
                                             button1 = types.InlineKeyboardButton("Показать на карте",
@@ -2663,6 +2119,747 @@ def func(message):
                                                 bot.send_photo(message.chat.id, photo=img,
                                                                caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
                                                                reply_markup=markup, parse_mode='Markdown')
+                                print(min_dist)
+                                rest.remove(min_dist)
+                                break
+                        count += 1
+        elif message.text == 'Показать ещё⤵' and location.random == 3:
+            for k in range(3):
+                with open("kalyan.csv", encoding='utf-8') as r_file:
+                    file_reader = csv.reader(r_file, delimiter=",")
+                    try:
+                        min_dist = min(rest)
+                    except ValueError:
+                        bot.send_message(message.chat.id, 'Вы просмотрели все кальянные 💨')
+                        break
+                    count = 0
+                    for row1 in file_reader:
+                        if count == 0:
+                            pass
+                        else:
+                            lat = row1[10]
+                            lon = row1[11]
+                            coords_2 = (lat, lon)
+                            if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
+                                name = row1[0]
+                                kitchen = row1[2]
+                                category = row1[1]
+                                price = row1[3]
+                                address = row1[4]
+                                schedule = row1[5].split(sep=',')
+                                phone = row1[6]
+                                url = row1[7]
+                                phot = requests.get(row1[8])
+                                id = row1[9]
+                                out = open("img.jpg", "wb")
+                                out.write(phot.content)
+                                out.close()
+                                img = open('img.jpg', 'rb')
+                                week = datetime.datetime.today().weekday() + 1
+                                markup = types.InlineKeyboardMarkup()
+                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                markup.add(button1)
+
+                                schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
+                                if url == '':
+                                    if phone != '':
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                else:
+                                    if phone != '':
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                rest.remove(min_dist)
+                                break
+                        count += 1
+        elif message.text == 'Показать ещё⤵' and location.random == 4:
+            for k in range(3):
+                with open("bar.csv", encoding='utf-8') as r_file:
+                    file_reader = csv.reader(r_file, delimiter=",")
+                    try:
+                        min_dist = min(rest)
+                    except ValueError:
+                        bot.send_message(message.chat.id, 'Вы просмотрели все бары 💨')
+                        break
+                    count = 0
+                    for row1 in file_reader:
+                        if count == 0:
+                            pass
+                        else:
+                            lat = row1[10]
+                            lon = row1[11]
+                            coords_2 = (lat, lon)
+                            if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
+                                name = row1[0]
+                                kitchen = row1[2]
+                                category = row1[1]
+                                price = row1[3]
+                                address = row1[4]
+                                schedule = row1[5].split(sep=',')
+                                phone = row1[6]
+                                url = row1[7]
+                                phot = requests.get(row1[8])
+                                id = row1[9]
+                                out = open("img.jpg", "wb")
+                                out.write(phot.content)
+                                out.close()
+                                img = open('img.jpg', 'rb')
+                                week = datetime.datetime.today().weekday() + 1
+                                markup = types.InlineKeyboardMarkup()
+                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                markup.add(button1)
+
+                                schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
+                                if url == '':
+                                        if phone != '':
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+
+                                else:
+                                    if phone != '':
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                rest.remove(min_dist)
+                                break
+                        count += 1
+        elif message.text == 'Показать ещё⤵' and location.random == 5:
+            for k in range(3):
+                with open("breakfast.csv", encoding='utf-8') as r_file:
+                    file_reader = csv.reader(r_file, delimiter=",")
+                    try:
+                        min_dist = min(rest)
+                    except ValueError:
+                        bot.send_message(message.chat.id, 'Вы просмотрели все заведения с завтраками 💨')
+                        break
+                    count = 0
+                    for row1 in file_reader:
+                        if count == 0:
+                            pass
+                        else:
+                            lat = row1[10]
+                            lon = row1[11]
+                            coords_2 = (lat, lon)
+                            if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
+                                name = row1[0]
+                                kitchen = row1[2]
+                                category = row1[1]
+                                price = row1[3]
+                                address = row1[4]
+                                schedule = row1[5].split(sep=',')
+                                phone = row1[6]
+                                url = row1[7]
+                                phot = requests.get(row1[8])
+                                id = row1[9]
+                                out = open("img.jpg", "wb")
+                                out.write(phot.content)
+                                out.close()
+                                img = open('img.jpg', 'rb')
+                                week = datetime.datetime.today().weekday() + 1
+                                markup = types.InlineKeyboardMarkup()
+                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                markup.add(button1)
+
+                                schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
+                                if url == '':
+                                        if phone != '':
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+
+                                else:
+                                    if phone != '':
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                rest.remove(min_dist)
+                                break
+                        count += 1
+        elif message.text == 'Показать ещё⤵' and location.random == 6:
+            for k in range(3):
+                with open("karaoke.csv", encoding='utf-8') as r_file:
+                    file_reader = csv.reader(r_file, delimiter=",")
+                    try:
+                        min_dist = min(rest)
+                    except ValueError:
+                        bot.send_message(message.chat.id, 'Вы просмотрели все заведения с караоке 💨')
+                        break
+                    count = 0
+                    for row1 in file_reader:
+                        if count == 0:
+                            pass
+                        else:
+                            lat = row1[10]
+                            lon = row1[11]
+                            coords_2 = (lat, lon)
+                            if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
+                                name = row1[0]
+                                kitchen = row1[2]
+                                category = row1[1]
+                                price = row1[3]
+                                address = row1[4]
+                                schedule = row1[5].split(sep=',')
+                                phone = row1[6]
+                                url = row1[7]
+                                phot = requests.get(row1[8])
+                                id = row1[9]
+                                out = open("img.jpg", "wb")
+                                out.write(phot.content)
+                                out.close()
+                                img = open('img.jpg', 'rb')
+                                week = datetime.datetime.today().weekday() + 1
+                                markup = types.InlineKeyboardMarkup()
+                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                markup.add(button1)
+
+                                schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
+                                if url == '':
+                                    if phone != '':
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                 url=f'https://2gis.ru/kirov/firm/{id}')
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+
+                                else:
+                                    if phone != '':
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        if kitchen == '':
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            markup = types.InlineKeyboardMarkup()
+                                            button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                            markup.add(button1)
+                                            if price == '':
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                bot.send_photo(message.chat.id, photo=img,
+                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                               reply_markup=markup, parse_mode='Markdown')
+                                rest.remove(min_dist)
+                                break
+                        count += 1
+        elif message.text == 'Показать ещё⤵' and location.random == 7:
+            for k in range(3):
+                with open("all_objects.csv", encoding='utf-8') as r_file:
+                    file_reader = csv.reader(r_file, delimiter=",")
+                    try:
+                        min_dist = min(rest)
+                    except ValueError:
+                        bot.send_message(message.chat.id, 'Вы просмотрели все заведения 💨')
+                        break
+                    count = 0
+                    for row1 in file_reader:
+                        try:
+                            if count == 0:
+                                pass
+                            else:
+                                lat = row1[10]
+                                lon = row1[11]
+                                coords_2 = (lat, lon)
+                                if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
+                                    name = row1[0]
+                                    kitchen = row1[2]
+                                    category = row1[1]
+                                    price = row1[3]
+                                    address = row1[4]
+                                    schedule = row1[5].split(sep=',')
+                                    phone = row1[6]
+                                    url = row1[7]
+                                    phot = requests.get(row1[8])
+                                    id = row1[9]
+                                    out = open("img.jpg", "wb")
+                                    out.write(phot.content)
+                                    out.close()
+                                    img = open('img.jpg', 'rb')
+                                    week = datetime.datetime.today().weekday() + 1
+                                    markup = types.InlineKeyboardMarkup()
+                                    button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                    markup.add(button1)
+
+                                    schedule = schedule[week - 1].replace(']', '').replace("'", '').replace('[', '').replace('-', ':')
+                                    if url == '':
+                                        if phone != '':
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+
+                                    else:
+                                        if phone != '':
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                     rest.remove(min_dist)
                                     break
                             count += 1
@@ -2714,65 +2911,106 @@ def func(message):
                                                 button1 = types.InlineKeyboardButton("Показать на карте",
                                                                                      url=f'https://2gis.ru/kirov/firm/{id}')
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                             else:
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Показать на карте",
                                                                                      url=f'https://2gis.ru/kirov/firm/{id}')
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                         else:
                                             if kitchen == '':
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Показать на карте",
                                                                                      url=f'https://2gis.ru/kirov/firm/{id}')
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                             else:
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Показать на карте",
                                                                                      url=f'https://2gis.ru/kirov/firm/{id}')
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+
                                     else:
                                         if phone != '':
                                             if kitchen == '':
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                             else:
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                         else:
                                             if kitchen == '':
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                             else:
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                     rest.remove(min_dist)
                                     break
                             count += 1
@@ -2824,65 +3062,106 @@ def func(message):
                                                 button1 = types.InlineKeyboardButton("Показать на карте",
                                                                                      url=f'https://2gis.ru/kirov/firm/{id}')
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                             else:
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Показать на карте",
                                                                                      url=f'https://2gis.ru/kirov/firm/{id}')
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                         else:
                                             if kitchen == '':
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Показать на карте",
                                                                                      url=f'https://2gis.ru/kirov/firm/{id}')
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                             else:
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Показать на карте",
                                                                                      url=f'https://2gis.ru/kirov/firm/{id}')
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+
                                     else:
                                         if phone != '':
                                             if kitchen == '':
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                             else:
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                         else:
                                             if kitchen == '':
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                             else:
                                                 markup = types.InlineKeyboardMarkup()
                                                 button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                                 markup.add(button1)
-                                                bot.send_photo(message.chat.id, photo=img,
-                                                               caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                               reply_markup=markup, parse_mode='Markdown')
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                     rest.remove(min_dist)
                                     break
                             count += 1
@@ -3905,8 +4184,6 @@ def func(message):
                         btn3 = types.KeyboardButton("📅 Афиша")
                         btn4 = types.KeyboardButton("🎲Случайное")
                         markup.add(btn1, btn2, btn3, btn4)
-                        if price == '':
-                            price = '???'
                         if url == '':
                             if phone != '':
                                 if kitchen == '':
@@ -3914,65 +4191,106 @@ def func(message):
                                     button1 = types.InlineKeyboardButton("Показать на карте",
                                                                          url=f'https://2gis.ru/kirov/firm/{id}')
                                     markup.add(button1)
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                   reply_markup=markup, parse_mode='Markdown')
+                                    if price == '':
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                       reply_markup=markup, parse_mode='Markdown')
                                 else:
                                     markup = types.InlineKeyboardMarkup()
                                     button1 = types.InlineKeyboardButton("Показать на карте",
                                                                          url=f'https://2gis.ru/kirov/firm/{id}')
                                     markup.add(button1)
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                   reply_markup=markup, parse_mode='Markdown')
+                                    if price == '':
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                       reply_markup=markup, parse_mode='Markdown')
                             else:
                                 if kitchen == '':
                                     markup = types.InlineKeyboardMarkup()
                                     button1 = types.InlineKeyboardButton("Показать на карте",
                                                                          url=f'https://2gis.ru/kirov/firm/{id}')
                                     markup.add(button1)
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                   reply_markup=markup, parse_mode='Markdown')
+                                    if price == '':
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                       reply_markup=markup, parse_mode='Markdown')
                                 else:
                                     markup = types.InlineKeyboardMarkup()
                                     button1 = types.InlineKeyboardButton("Показать на карте",
                                                                          url=f'https://2gis.ru/kirov/firm/{id}')
                                     markup.add(button1)
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                   reply_markup=markup, parse_mode='Markdown')
+                                    if price == '':
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+
                         else:
                             if phone != '':
                                 if kitchen == '':
                                     markup = types.InlineKeyboardMarkup()
                                     button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                     markup.add(button1)
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                   reply_markup=markup, parse_mode='Markdown')
+                                    if price == '':
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                       reply_markup=markup, parse_mode='Markdown')
                                 else:
                                     markup = types.InlineKeyboardMarkup()
                                     button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                     markup.add(button1)
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
-                                                   reply_markup=markup, parse_mode='Markdown')
+                                    if price == '':
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                       reply_markup=markup, parse_mode='Markdown')
                             else:
                                 if kitchen == '':
                                     markup = types.InlineKeyboardMarkup()
                                     button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                     markup.add(button1)
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                   reply_markup=markup, parse_mode='Markdown')
+                                    if price == '':
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                       reply_markup=markup, parse_mode='Markdown')
                                 else:
                                     markup = types.InlineKeyboardMarkup()
                                     button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                     markup.add(button1)
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
-                                                   reply_markup=markup, parse_mode='Markdown')
+                                    if price == '':
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                       reply_markup=markup, parse_mode='Markdown')
+                                    else:
+                                        bot.send_photo(message.chat.id, photo=img,
+                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                       reply_markup=markup, parse_mode='Markdown')
                         log+=1
                 if log == 0:
                     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
@@ -4056,10 +4374,115 @@ def location(message):
                                     markup = types.InlineKeyboardMarkup()
                                     button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
                                     markup.add(button1)
-
+                                    print(name, url)
                                     schedule = schedule[week-1].replace(']', '').replace("'", '').replace('[', '').replace("-", ' ')
-                                    bot.send_photo(message.chat.id, photo=img,
-                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",  reply_markup=markup, parse_mode='Markdown')
+                                    if url == '':
+                                        if phone != '':
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Показать на карте",
+                                                                                     url=f'https://2gis.ru/kirov/firm/{id}')
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+
+                                    else:
+                                        if phone != '':
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
                                     rest.remove(min_dist)
                                     break
                             count+=1
@@ -4445,7 +4868,7 @@ def location(message):
                 markup.add(btn1, btn3)
                 bot.send_message(message.chat.id, 'Ищем ближайшие заведения', reply_markup=markup)
                 for k in range(3):
-                    try:
+                    #try:
                         with open("all_objects.csv", encoding='utf-8') as r_file:
                             file_reader = csv.reader(r_file, delimiter=",")
                             min_dist = min(rest)
@@ -4533,11 +4956,63 @@ def location(message):
                                                         bot.send_photo(message.chat.id, photo=img,
                                                                        caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
                                                                        reply_markup=markup, parse_mode='Markdown')
+
+                                        else:
+                                            if phone != '':
+                                                if kitchen == '':
+                                                    markup = types.InlineKeyboardMarkup()
+                                                    button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                    markup.add(button1)
+                                                    if price == '':
+                                                        bot.send_photo(message.chat.id, photo=img,
+                                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                       reply_markup=markup, parse_mode='Markdown')
+                                                    else:
+                                                        bot.send_photo(message.chat.id, photo=img,
+                                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                       reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    markup = types.InlineKeyboardMarkup()
+                                                    button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                    markup.add(button1)
+                                                    if price == '':
+                                                        bot.send_photo(message.chat.id, photo=img,
+                                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                       reply_markup=markup, parse_mode='Markdown')
+                                                    else:
+                                                        bot.send_photo(message.chat.id, photo=img,
+                                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                       reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                if kitchen == '':
+                                                    markup = types.InlineKeyboardMarkup()
+                                                    button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                    markup.add(button1)
+                                                    if price == '':
+                                                        bot.send_photo(message.chat.id, photo=img,
+                                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                       reply_markup=markup, parse_mode='Markdown')
+                                                    else:
+                                                        bot.send_photo(message.chat.id, photo=img,
+                                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                       reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    markup = types.InlineKeyboardMarkup()
+                                                    button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                    markup.add(button1)
+                                                    if price == '':
+                                                        bot.send_photo(message.chat.id, photo=img,
+                                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                       reply_markup=markup, parse_mode='Markdown')
+                                                    else:
+                                                        bot.send_photo(message.chat.id, photo=img,
+                                                                       caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                       reply_markup=markup, parse_mode='Markdown')
                                         rest.remove(min_dist)
                                         break
                                 count+=1
-                    except ValueError:
-                        continue
+                    #except ValueError:
+                    #    continue
 
     elif message.location is not None and func.random == 2:
         location.random = 2
@@ -4699,6 +5174,7 @@ def location(message):
                                 coords_2 = (lat, lon)
                                 if min_dist == geopy.distance.geodesic(coords_1, coords_2).km:
                                     name = row1[0]
+                                    print(name)
                                     kitchen = row1[2]
                                     category = row1[1]
                                     price = row1[3].replace('Средний чек', '')
@@ -4771,6 +5247,58 @@ def location(message):
                                                 else:
                                                     bot.send_photo(message.chat.id, photo=img,
                                                                    caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+
+                                    else:
+                                        if phone != '':
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
                                                                    reply_markup=markup, parse_mode='Markdown')
                                     rest.remove(min_dist)
                                     break
@@ -4889,6 +5417,58 @@ def location(message):
                                                 else:
                                                     bot.send_photo(message.chat.id, photo=img,
                                                                    caption=f"[{name}]({f'https://2gis.ru/kirov/firm/{id}'})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+
+                                    else:
+                                        if phone != '':
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}\n📞Телефон: {phone}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                        else:
+                                            if kitchen == '':
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                            else:
+                                                markup = types.InlineKeyboardMarkup()
+                                                button1 = types.InlineKeyboardButton("Сайт/меню", url=url)
+                                                markup.add(button1)
+                                                if price == '':
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
+                                                                   reply_markup=markup, parse_mode='Markdown')
+                                                else:
+                                                    bot.send_photo(message.chat.id, photo=img,
+                                                                   caption=f"[{name}]({url})\n\n🔎Категория: {category}\n👨‍🍳Кухня: {kitchen}\n💵Ценовой диапазон: {price}\n [🗂Отзывы](https://2gis.ru/kirov/firm/{id}/tab/reviews)\n📍Адрес: [{address}](https://2gis.ru/kirov/firm/{id})\n🕑Режим работы: {schedule}",
                                                                    reply_markup=markup, parse_mode='Markdown')
                                     rest.remove(min_dist)
                                     break
